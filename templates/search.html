@@ -1,0 +1,95 @@
+<!-- templates/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search by Paper ID</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #343a40;
+        }
+        .no-results {
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+        }
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+        table tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Search Registration by Paper ID</h1>
+        <form method="POST" class="mb-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="paper_id">Enter Paper ID:</label>
+                <input type="text" id="paper_id" name="paper_id" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </form>
+
+        {% if results %}
+            <h2>Registration Details:</h2>
+            <p><strong>Paper ID:</strong> {{ results.registration.paper_id }}</p>
+            <p><strong>College:</strong> {{ results.registration.college }}</p>
+            <p><strong>Department:</strong> {{ results.registration.department }}</p>
+            <p><strong>Paper Title:</strong> {{ results.registration.paper_title }}</p>
+            <p><strong>Submission Link:</strong> <a href="{{ results.registration.paper_submission_link }}">{{ results.registration.paper_submission_link }}</a></p>
+            <p><strong>Payment Link:</strong> <a href="{{ results.registration.payment_link }}">{{ results.registration.payment_link }}</a></p>
+            <p><strong>Transaction Number:</strong> {{ results.registration.transaction_number }}</p>
+            <p><strong>WhatsApp Group Link:</strong> <a href="{{ results.registration.whatsapp_group_link }}">{{ results.registration.whatsapp_group_link }}</a></p>
+
+            <h2>Team Members:</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Technical Events</th>
+                        <th>Non-Technical Events</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in results.members %}
+                        <tr>
+                            <td>{{ member.name }}</td>
+                            <td>{{ member.email }}</td>
+                            <td>{{ member.phone }}</td>
+                            <td>
+                                {% for event in member.technical_events.all %}
+                                    {{ event.name }}<br>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for event in member.non_technical_events.all %}
+                                    {{ event.name }}<br>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif results is not None %}
+            <p class="no-results">No results found for the given Paper ID.</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #aaf8e9, #ACB6E5);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #007bff;
+            text-align: center;
+        }
+
+        label {
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            border: 1px solid #e3e6f0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+            border-color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        fieldset {
+            border: 1px solid #e3e6f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        fieldset legend {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .btn-link {
+            color: #007bff;
+            padding-left: 0;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin-top: 30px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="my-4">Event Registration Form</h2>
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <!-- Team Leader Details -->
+            <div class="form-group">
+                <label for="id_name">Your Name</label>
+                <input type="text" class="form-control" id="id_name" name="name" placeholder="Enter your name" required>
+            </div>
+
+
+
+            <!-- College -->
+            <div class="form-group">
+                <label for="id_college">College</label>
+                <input type="text" class="form-control" id="id_college" name="college" placeholder="Enter your college"
+                    required>
+            </div>
+
+            <!-- Department -->
+            <div class="form-group">
+                <label for="id_dept">Department</label>
+                <input type="text" class="form-control" id="id_dept" name="dept" placeholder="Enter your department"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="id_phone">Phone</label>
+                <input type="tel" class="form-control" id="id_phone" name="phone" placeholder="Enter your phone number"
+                    required>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="id_email">Email</label>
+                <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter your email"
+                    required>
+            </div>
+            <!-- Team Name -->
+            <div class="form-group">
+                <label for="id_team_name">Team Name</label>
+                <input type="text" class="form-control" id="id_team_name" name="team_name"
+                    placeholder="Enter your team name" required>
+            </div>
+
+            <!-- Team Member 1 Details -->
+
+            <!-- Team Member 1 Technical Events -->
+            <fieldset class="form-group">
+                <legend>Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member1_paper_presentation" name="member1_technical_events"
+                        value="paper_presentation">
+                    <label for="member1_paper_presentation">Paper Presentation</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member1_technical_quiz" name="member1_technical_events"
+                        value="technical_quiz">
+                    <label for="member1_technical_quiz">Technical Quiz</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member1_debugging" name="member1_technical_events" value="debugging">
+                    <label for="member1_debugging">Debugging</label>
+                </div>
+            </fieldset>
+
+            <!-- Team Member 1 Non-Technical Events -->
+            <fieldset class="form-group">
+                <legend>Non-Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member1_connection" name="member1_non_technical_events"
+                        value="connection">
+                    <label for="member1_connection">Connection</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member1_freefire" name="member1_non_technical_events" value="freefire">
+                    <label for="member1_freefire">Freefire</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member1_pencil_art" name="member1_non_technical_events"
+                        value="pencil_art">
+                    <label for="member1_pencil_art">Pencil Art</label>
+                </div>
+            </fieldset>
+
+            <!-- Team Member 2 Details -->
+            <h3>Team Member 2</h3>
+            <div class="form-group">
+                <label for="id_member2_name">Name</label>
+                <input type="text" class="form-control" id="id_member2_name" name="member2_name"
+                    placeholder="Enter team member 2 name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_member2_email">Email</label>
+                <input type="email" class="form-control" id="id_member2_email" name="member2_email"
+                    placeholder="Enter team member 2 email" required>
+            </div>
+            <div class="form-group">
+                <label for="id_member2_phone">Phone</label>
+                <input type="tel" class="form-control" id="id_member2_phone" name="member2_phone"
+                    placeholder="Enter team member 2 phone number" required>
+            </div>
+
+            <!-- Team Member 2 Technical Events -->
+            <fieldset class="form-group">
+                <legend>Team Member 2 Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member2_paper_presentation" name="member2_technical_events"
+                        value="paper_presentation">
+                    <label for="member2_paper_presentation">Paper Presentation</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member2_technical_quiz" name="member2_technical_events"
+                        value="technical_quiz">
+                    <label for="member2_technical_quiz">Technical Quiz</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member2_debugging" name="member2_technical_events" value="debugging">
+                    <label for="member2_debugging">Debugging</label>
+                </div>
+            </fieldset>
+
+            <!-- Team Member 2 Non-Technical Events -->
+            <fieldset class="form-group">
+                <legend>Team Member 2 Non-Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member2_connection" name="member2_non_technical_events"
+                        value="connection">
+                    <label for="member2_connection">Connection</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member2_freefire" name="member2_non_technical_events" value="freefire">
+                    <label for="member2_freefire">Freefire</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member2_pencil_art" name="member2_non_technical_events"
+                        value="pencil_art">
+                    <label for="member2_pencil_art">Pencil Art</label>
+                </div>
+            </fieldset>
+
+            <!-- Team Member 3 Details -->
+            <h3>Team Member 3</h3>
+            <div class="form-group">
+                <label for="id_member3_name">Name</label>
+                <input type="text" class="form-control" id="id_member3_name" name="member3_name"
+                    placeholder="Enter team member 3 name" required>
+            </div>
+            <div class="form-group">
+                <label for="id_member3_email">Email</label>
+                <input type="email" class="form-control" id="id_member3_email" name="member3_email"
+                    placeholder="Enter team member 3 email" required>
+            </div>
+            <div class="form-group">
+                <label for="id_member3_phone">Phone</label>
+                <input type="tel" class="form-control" id="id_member3_phone" name="member3_phone"
+                    placeholder="Enter team member 3 phone number" required>
+            </div>
+
+            <!-- Team Member 3 Technical Events -->
+            <fieldset class="form-group">
+                <legend>Team Member 3 Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member3_paper_presentation" name="member3_technical_events"
+                        value="paper_presentation">
+                    <label for="member3_paper_presentation">Paper Presentation</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member3_technical_quiz" name="member3_technical_events"
+                        value="technical_quiz">
+                    <label for="member3_technical_quiz">Technical Quiz</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member3_debugging" name="member3_technical_events" value="debugging">
+                    <label for="member3_debugging">Debugging</label>
+                </div>
+            </fieldset>
+
+            <!-- Team Member 3 Non-Technical Events -->
+            <fieldset class="form-group">
+                <legend>Team Member 3 Non-Technical Events</legend>
+                <div>
+                    <input type="checkbox" id="member3_connection" name="member3_non_technical_events"
+                        value="connection">
+                    <label for="member3_connection">Connection</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member3_freefire" name="member3_non_technical_events" value="freefire">
+                    <label for="member3_freefire">Freefire</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="member3_pencil_art" name="member3_non_technical_events"
+                        value="pencil_art">
+                    <label for="member3_pencil_art">Pencil Art</label>
+                </div>
+            </fieldset>
+
+            <!-- Paper Title -->
+            <div class="form-group">
+                <label for="id_paper_title">Paper Title</label>
+                <input type="text" class="form-control" id="id_paper_title" name="paper_title"
+                    placeholder="Enter your paper title" required>
+            </div>
+
+            <!-- Paper Submission Link (OneDrive) -->
+            <div class="form-group">
+                <label>Paper Submission Link (Dropbox)</label>
+                <div>
+                    <a href="https://www.dropbox.com/request/XBMKEzFUV2D7kgqXmCxL" target="_blank"
+                        class="btn btn-link">Click here to upload</a>
+                </div>
+                <p class="text-muted">Once uploaded, please copy the link and paste it in the field below:</p>
+                <input type="url" class="form-control" id="id_paper_link" name="paper_link"
+                    placeholder="Paste OneDrive link here" required>
+            </div>
+
+            <!-- Payment QR Code Image -->
+            <div class="form-group">
+                <label>Payment QR Code</label>
+                <div class="payment-qr">
+                    <img src="{% static 'images/gpay-image.jpg' %}" alt="Payment QR Code" style="max-width: 200px;">
+                </div>
+            </div>
+
+            <!-- Payment Submission Link (OneDrive) -->
+            <div class="form-group">
+                <label>Payment Submission Link (Dropbox)</label>
+                <div>
+                    <a href="https://www.dropbox.com/request/AM5u9cfltAKI4UPEEvEi" target="_blank"
+                        class="btn btn-link">Click here to upload</a>
+                </div>
+                <p class="text-muted">Once uploaded, please copy the link and paste it in the field below:</p>
+                <input type="url" class="form-control" id="id_payment_link" name="payment_link"
+                    placeholder="Paste OneDrive link here" required>
+            </div>
+
+            <!-- Transaction Number -->
+            <div class="form-group">
+                <label for="id_transaction_num">Transaction Number</label>
+                <input type="text" class="form-control" id="id_transaction_num" name="transaction_num"
+                    placeholder="Enter the transaction number" required>
+            </div>
+
+            <!-- WhatsApp Group Link -->
+            <div class="form-group">
+                <label for="id_whatsapp_link">WhatsApp Group Link</label>
+                <input type="url" class="form-control" id="id_whatsapp_link" name="whatsapp_link"
+                    placeholder="Enter WhatsApp group link" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
