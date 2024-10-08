@@ -20,16 +20,13 @@ class Team(models.Model):
 
 class Registration(models.Model):
     paper_id = models.CharField(max_length=20, null=True)  # Paper ID can be NULL
-    team_name = models.ForeignKey(Team, related_name='registrations', on_delete=models.CASCADE,null=True)  # ForeignKey to Team
+    team_name = models.ForeignKey('Team', related_name='registrations', on_delete=models.CASCADE, null=True)  # ForeignKey to Team
     college = models.CharField(max_length=255, null=True, blank=True)  # College can be NULL
     department = models.CharField(max_length=100, null=True, blank=True)  # Department can be NULL
     phone = models.CharField(max_length=15, null=True, blank=True)  # Phone can be NULL
     email = models.EmailField(null=True, blank=True)  # Email can be NULL
     paper_title = models.CharField(max_length=255, null=True, blank=True)  # Paper title can be NULL
     paper_submission_link = models.URLField(null=True, blank=True)  # Paper submission link can be NULL
-    payment_link = models.URLField(null=True, blank=True)  # Payment link can be NULL
-    transaction_number = models.CharField(max_length=100, null=True, blank=True)  # Transaction number can be NULL
-    whatsapp_group_link = models.URLField(null=True, blank=True)  # WhatsApp group link can be NULL
 
     def __str__(self):
         return f'{self.team_name} ({self.college})'

@@ -11,12 +11,7 @@ def register(request):
         department = request.POST.get('dept')
         paper_title = request.POST.get('paper_title')
         paper_submission_link = request.POST.get('paper_link')
-        payment_link = request.POST.get('payment_link')
-        transaction_number = request.POST.get('transaction_num')
-        whatsapp_group_link = request.POST.get('whatsapp_link')
         team_name = request.POST.get('team_name')
-        technical_events = request.POST.getlist('technical_events')
-        non_technical_events = request.POST.getlist('non_technical_events')
 
         # Create or get the team
         team, created = Team.objects.get_or_create(name=team_name)
@@ -28,9 +23,6 @@ def register(request):
             department=department,
             paper_title=paper_title,
             paper_submission_link=paper_submission_link,
-            payment_link=payment_link,
-            transaction_number=transaction_number,
-            whatsapp_group_link=whatsapp_group_link,
             phone=request.POST.get('phone'),
             email=request.POST.get('email'),
         )
@@ -46,22 +38,16 @@ def register(request):
                 'name': leader_name,
                 'email': request.POST.get('email'),
                 'phone': request.POST.get('phone'),
-                'technical_events': technical_events,
-                'non_technical_events': non_technical_events
             },
             {
                 'name': request.POST.get('member2_name'),
                 'email': request.POST.get('member2_email'),
                 'phone': request.POST.get('member2_phone'),
-                'technical_events': request.POST.getlist('member2_technical_events'),
-                'non_technical_events': request.POST.getlist('member2_non_technical_events')
             },
             {
                 'name': request.POST.get('member3_name'),
                 'email': request.POST.get('member3_email'),
                 'phone': request.POST.get('member3_phone'),
-                'technical_events': request.POST.getlist('member3_technical_events'),
-                'non_technical_events': request.POST.getlist('member3_non_technical_events')
             },
         ]
 
@@ -73,16 +59,6 @@ def register(request):
                 phone=member_data['phone']
             )
             member.save()
-
-            # Add selected technical events for the member
-            for event_name in member_data['technical_events']:
-                event_instance, created = Event.objects.get_or_create(name=event_name, event_type='technical')
-                member.technical_events.add(event_instance)
-
-            # Add selected non-technical events for the member
-            for event_name in member_data['non_technical_events']:
-                event_instance, created = Event.objects.get_or_create(name=event_name, event_type='non_technical')
-                member.non_technical_events.add(event_instance)
 
         # After saving, redirect to a success page with the paper ID
         return render(request, 'success.html', {'paper_id': registration.paper_id})
