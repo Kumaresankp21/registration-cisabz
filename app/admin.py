@@ -36,11 +36,13 @@ class TeamMemberAdmin(ExportMixin, admin.ModelAdmin):
     )
     search_fields = (
         'name', 
-        'registration__college', 
         'registration__paper_id', 
-        'registration__department', 
         'registration__email'
     )
+    list_filter = (
+        'registration__paper_id',  # Only filter by Paper ID
+    )
+    list_per_page = 20  # Set the number of items per page for pagination
 
     def get_paper_id(self, obj):
         return obj.registration.paper_id

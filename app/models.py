@@ -36,8 +36,5 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)  # Name can be NULL
     email = models.EmailField(null=True, blank=True)  # Email can be NULL
     phone = models.CharField(max_length=15, null=True, blank=True)  # Phone can be NULL
-    technical_events = models.ManyToManyField(Event, related_name='technical_registrations', blank=True)
-    non_technical_events = models.ManyToManyField(Event, related_name='non_technical_registrations', blank=True)
-
     def __str__(self):
         return self.name
