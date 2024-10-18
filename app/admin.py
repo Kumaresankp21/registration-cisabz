@@ -13,12 +13,14 @@ class TeamMemberResource(resources.ModelResource):
             'email', 
             'phone', 
             'registration__paper_id', 
+            'registration__paper_title',  # Include paper title for export
             'registration__college', 
             'registration__department',
             'registration__team_name__name',  # Include team name for export
         )
         export_order = (
             'registration__paper_id', 
+            'registration__paper_title',  # Add paper title to export order
             'name', 
             'email', 
             'phone', 
